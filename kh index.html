@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>K‑House | Community for Foreigners in Korea</title>
+  <meta name="description" content="Visa, housing, jobs, travel, Q&A — a friendly hub for foreigners living in Korea." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;--panel:#111a2a;--text:#e8f0ff;--muted:#9bb0cc;--brand:#3f82ff;--brand2:#22d3ee;--ok:#16a34a;--warn:#f59e0b;--err:#ef4444;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.35)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(1000px 500px at 90% -10%,rgba(63,130,255,.18),transparent 60%),radial-gradient(900px 500px at -10% 10%,rgba(34,211,238,.12),transparent 60%),var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 18px}
+    header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.25);font-weight:800}
+    .brand h1{font-size:18px;margin:0}
+    .nav-right{display:flex;gap:10px;align-items:center}
+    .btn{padding:10px 12px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:transparent;color:var(--text);cursor:pointer;font-weight:600}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));border:0}
+    .btn.ghost{background:transparent}
+
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:54px 0}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(63,130,255,.15);border:1px solid rgba(63,130,255,.35);margin-bottom:12px}
+    h2{font-size:40px;line-height:1.15;margin:0 0 10px}
+    .grad{-webkit-background-clip:text;background-clip:text;color:transparent;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+    .sub{color:var(--muted)}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)}
+    .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .q{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:14px;border-radius:14px}
+
+    .searchbar{display:flex;gap:10px;margin:10px 0}
+    input[type="search"],select{flex:1;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:#0f1728;color:var(--text)}
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+    .chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);cursor:pointer}
+    .chip.active{background:linear-gradient(135deg,var(--brand),var(--brand2));border:0}
+
+    section{padding:34px 0}
+    .section-title{font-size:26px;margin:0 0 8px}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+    .feed{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden}
+    .thumb{height:140px;background:linear-gradient(135deg,rgba(63,130,255,.5),rgba(34,211,238,.4))}
+    .content{padding:16px;background:var(--panel);border-top:1px solid rgba(255,255,255,.06)}
+    .meta{color:var(--muted);font-size:13px;margin-top:6px}
+
+    .sidebar{display:grid;gap:12px}
+    .panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:16px;border-radius:16px}
+    .panel h4{margin:0 0 10px}
+
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:18px}
+    .modal .box{background:#0f1728;border:1px solid rgba(255,255,255,.12);border-radius:16px;max-width:520px;width:100%;padding:18px}
+    label{display:block;font-weight:600;margin:10px 0 6px}
+    input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1728;color:var(--text)}
+    textarea{min-height:120px}
+
+    footer{padding:22px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:24px}
+
+    @media (max-width: 980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.feed{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">K</div>
+        <h1>K‑House</h1>
+      </div>
+      <div class="nav-right">
+        <select id="langSel" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="vi">Tiếng Việt</option>
+        </select>
+        <button class="btn" id="loginBtn">Sign in</button>
+        <button class="btn primary" id="postBtn">New Post</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="badge" id="badge">Friendly hub for life in Korea</div>
+        <h2><span class="grad" id="heroH1">Ask. Share. Settle in.</span></h2>
+        <p class="sub" id="heroP">Visa, housing, jobs, travel and everyday tips — built by and for foreigners in Korea.</p>
+        <div class="searchbar">
+          <input id="q" type="search" placeholder="Search posts (visa, housing, part-time)…" aria-label="Search" />
+          <button class="btn" id="searchBtn">Search</button>
+        </div>
+        <div class="filters" id="filters"></div>
+      </div>
+      <div class="hero-card">
+        <div class="quick">
+          <div class="q">
+            <div style="font-weight:700" id="q1">Visa Guide</div>
+            <div class="meta">D‑4 / D‑2 / E‑2 / F‑2 basics</div>
+          </div>
+          <div class="q">
+            <div style="font-weight:700" id="q2">Housing 101</div>
+            <div class="meta">Gosiwon · One‑room · Jeonse</div>
+          </div>
+          <div class="q">
+            <div style="font-weight:700" id="q3">Jobs & Part‑time</div>
+            <div class="meta">CV tips, interview, visa check</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEED -->
+    <section>
+      <h3 class="section-title" id="feedTitle">Latest posts</h3>
+      <div class="grid">
+        <div>
+          <div class="feed" id="feed"></div>
+        </div>
+        <aside class="sidebar">
+          <div class="panel">
+            <h4 id="trending">Trending</h4>
+            <ul id="trendList"></ul>
+          </div>
+          <div class="panel">
+            <h4 id="resources">Quick resources</h4>
+            <ul style="margin:0;padding-left:16px;line-height:1.9">
+              <li><a href="#" onclick="alert('Sample link')">Hi‑Korea (immigration)</a></li>
+              <li><a href="#" onclick="alert('Sample link')">Subway map</a></li>
+              <li><a href="#" onclick="alert('Sample link')">Emergency 1339 / 112 / 119</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">© <span id="year"></span> K‑House · <a href="#" onclick="alert('Terms placeholder')">Terms</a> · <a href="#" onclick="alert('Privacy placeholder')">Privacy</a></div>
+    </footer>
+  </main>
+
+  <!-- Modal: Login -->
+  <div class="modal" id="loginModal" aria-hidden="true">
+    <div class="box">
+      <h3 id="signinTitle">Sign in</h3>
+      <p class="sub" id="signinSub">Demo only — just type a nickname</p>
+      <label id="nicknameLbl">Nickname</label>
+      <input id="nick" placeholder="e.g. Anna" />
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn primary" onclick="signIn()" id="signinBtn">Sign in</button>
+        <button class="btn" onclick="closeLogin()" id="cancelBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: New Post -->
+  <div class="modal" id="postModal" aria-hidden="true">
+    <div class="box">
+      <h3 id="newPostH3">Create a post</h3>
+      <label id="catLbl">Category</label>
+      <select id="catSel"></select>
+      <label id="titleLbl">Title</label>
+      <input id="titleInp" placeholder="Short, clear title" />
+      <label id="bodyLbl">Content</label>
+      <textarea id="bodyInp" placeholder="Write your question or tip…"></textarea>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn primary" onclick="submitPost()" id="publishBtn">Publish</button>
+        <button class="btn" onclick="closePost()" id="closeBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Post Detail -->
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="box" id="detailBox"></div>
+  </div>
+
+  <script>
+    // ===== i18n (basic) =====
+    const dict = {
+      en:{badge:'Friendly hub for life in Korea',h1:'Ask. Share. Settle in.',p:'Visa, housing, jobs, travel and everyday tips — built by and for foreigners in Korea.',feed:'Latest posts',trend:'Trending',res:'Quick resources',signin:'Sign in',signinSub:'Demo only — just type a nickname',nick:'Nickname',cancel:'Cancel',create:'Create a post',cat:'Category',title:'Title',body:'Content',publish:'Publish',close:'Close',searchPH:'Search posts (visa, housing, part-time)…',visa:'Visa',housing:'Housing',jobs:'Jobs',life:'Lifestyle',travel:'Travel',qa:'Q&A',guide1:'Visa Guide',guide2:'Housing 101',guide3:'Jobs & Part-time'},
+      ko:{badge:'한국 생활 외국인 커뮤니티',h1:'묻고, 나누고, 정착하세요.',p:'비자, 주거, 일자리, 여행, 생활 팁을 외국인끼리 함께 나눕니다.',feed:'최신 글',trend:'인기 글',res:'바로가기',signin:'로그인',signinSub:'데모입니다. 닉네임만 입력하세요',nick:'닉네임',cancel:'취소',create:'글 쓰기',cat:'카테고리',title:'제목',body:'내용',publish:'발행',close:'닫기',searchPH:'검색 (비자, 주거, 알바…)',visa:'비자',housing:'주거',jobs:'일자리',life:'라이프',travel:'여행',qa:'Q&A',guide1:'비자 가이드',guide2:'주거 기본',guide3:'일자리·알바'},
+      vi:{badge:'Cộng đồng người nước ngoài tại Hàn',h1:'Hỏi. Chia sẻ. Ổn định.',p:'Visa, nhà ở, việc làm, du lịch, mẹo sống hàng ngày.',feed:'Bài mới',trend:'Nổi bật',res:'Tài nguyên nhanh',signin:'Đăng nhập',signinSub:'Chỉ demo — nhập biệt danh',nick:'Biệt danh',cancel:'Hủy',create:'Tạo bài viết',cat:'Danh mục',title:'Tiêu đề',body:'Nội dung',publish:'Đăng',close:'Đóng',searchPH:'Tìm kiếm (visa, nhà ở, part-time)…',visa:'Visa',housing:'Nhà ở',jobs:'Việc làm',life:'Đời sống',travel:'Du lịch',qa:'Hỏi đáp',guide1:'Hướng dẫn visa',guide2:'Nhà ở cơ bản',guide3:'Việc làm & part-time'}
+    }
+
+    const cats = ['visa','housing','jobs','life','travel','qa'];
+
+    let lang = localStorage.getItem('kh_lang') || 'en';
+    let user = JSON.parse(localStorage.getItem('kh_user') || 'null');
+
+    const postsKey = 'kh_posts_v1';
+    let posts = JSON.parse(localStorage.getItem(postsKey) || 'null') || [
+      {id:'p1',cat:'visa',title:'D‑2 to D‑10 change — processing time?',body:'Anyone recently changed D‑2 to D‑10 in Seoul office? How long did it take?',nick:'Leo',ts:Date.now()-1000*60*60*26,views:42,likes:5},
+      {id:'p2',cat:'housing',title:'One‑room near Line 2 under 600k?',body:'Budget 600k/month, any areas to recommend? Prefer close to subway.',nick:'Anna',ts:Date.now()-1000*60*60*50,views:80,likes:12},
+      {id:'p3',cat:'jobs',title:'Part‑time cafe hiring foreigners (D‑4)?',body:'Beginner Korean, Eungam‑dong area. Any tips for resumes?',nick:'Minh',ts:Date.now()-1000*60*60*5,views:22,likes:2},
+      {id:'p4',cat:'life',title:'Best SIM for 3 months stay',body:'Looking for affordable plans with data.',nick:'Sara',ts:Date.now()-1000*60*60*70,views:65,likes:7}
+    ];
+
+    // ===== Helpers =====
+    const el = id=>document.getElementById(id);
+    const t = k=> (dict[lang]||dict.en)[k] || k;
+    const timeAgo = (ms)=>{const s=Math.floor((Date.now()-ms)/1000);if(s<60)return s+'s';const m=Math.floor(s/60);if(m<60)return m+'m';const h=Math.floor(m/60);if(h<24)return h+'h';const d=Math.floor(h/24);return d+'d'}
+
+    function applyLang(){
+      el('badge').textContent=t('badge');
+      el('heroH1').textContent=t('h1');
+      el('heroP').textContent=t('p');
+      el('feedTitle').textContent=t('feed');
+      el('trending').textContent=t('trend');
+      el('resources').textContent=t('res');
+      el('loginBtn').textContent = user? user.nick : t('signin');
+      el('postBtn').textContent=t('create');
+      el('signinTitle').textContent=t('signin');
+      el('signinSub').textContent=t('signinSub');
+      el('nicknameLbl').textContent=t('nick');
+      el('signinBtn').textContent=t('signin');
+      el('cancelBtn').textContent=t('cancel');
+      el('newPostH3').textContent=t('create');
+      el('catLbl').textContent=t('cat');
+      el('titleLbl').textContent=t('title');
+      el('bodyLbl').textContent=t('body');
+      el('publishBtn').textContent=t('publish');
+      el('closeBtn').textContent=t('close');
+      el('q').placeholder=t('searchPH');
+      el('q1').textContent=t('guide1');
+      el('q2').textContent=t('guide2');
+      el('q3').textContent=t('guide3');
+    }
+
+    // ===== Filters & Feed =====
+    function renderFilters(){
+      const wrap = el('filters');
+      wrap.innerHTML='';
+      const make = (code)=>{const b=document.createElement('button');b.className='chip';b.textContent='#'+t(code);b.onclick=()=>{activeCat=code;renderFeed()};return b}
+      const all = document.createElement('button'); all.className='chip active'; all.textContent='#All'; all.onclick=()=>{activeCat='all';renderFeed()};
+      wrap.appendChild(all);
+      cats.forEach(c=>wrap.appendChild(make(c)));
+    }
+
+    let activeCat = 'all';
+
+    function renderFeed(){
+      const q = el('q').value.trim().toLowerCase();
+      const list = posts.filter(p=> (activeCat==='all'||p.cat===activeCat) && (!q || (p.title+p.body).toLowerCase().includes(q)) )
+                        .sort((a,b)=>b.ts-a.ts);
+      const feed = el('feed'); feed.innerHTML='';
+      if(!list.length){feed.innerHTML='<div class="panel">No posts yet.</div>';return}
+      list.forEach(p=>{
+        const card = document.createElement('div'); card.className='card';
+        card.innerHTML = `<div class="thumb"></div>
+          <div class="content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700">${p.title}</div>
+              <div class="chip">#${t(p.cat)}</div>
+            </div>
+            <div class="meta">by ${p.nick} • ${timeAgo(p.ts)} • ${p.views} views • ${p.likes} ❤</div>
+            <div style="margin-top:8px;font-size:14px">${p.body.slice(0,140)}${p.body.length>140?'…':''}</div>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button class="btn" onclick="openDetail('${p.id}')">Open</button>
+              <button class="btn" onclick="likePost('${p.id}')">Like</button>
+              <button class="btn" onclick="reportPost('${p.id}')">Report</button>
+            </div>
+          </div>`;
+        feed.appendChild(card);
+      });
+      // highlight active chip
+      [...el('filters').children].forEach(b=>b.classList.remove('active'));
+      const idx = ['#All', ...cats.map(c=>'#'+t(c))].indexOf('#'+(activeCat==='all'?'All':t(activeCat)));
+      if(idx>-1) el('filters').children[idx].classList.add('active');
+      renderTrends();
+    }
+
+    function renderTrends(){
+      const ul = el('trendList');
+      const top = [...posts].sort((a,b)=>b.likes-a.likes).slice(0,5);
+      ul.innerHTML = top.map(p=>`<li><a href="#" onclick="openDetail('${p.id}')">${p.title}</a></li>`).join('');
+    }
+
+    // ===== Modals =====
+    const mod = id=>{const m=el(id);m.style.display='flex'}
+    const close = id=>{el(id).style.display='none'}
+
+    function openLogin(){mod('loginModal')}
+    function closeLogin(){close('loginModal')}
+
+    function openPost(){ if(!user) return openLogin();
+      // fill cats
+      const sel = el('catSel'); sel.innerHTML=''; cats.forEach(c=> sel.innerHTML += `<option value="${c}">${t(c)}</option>`);
+      mod('postModal')
+    }
+    function closePost(){close('postModal')}
+
+    function signIn(){
+      const nick = el('nick').value.trim(); if(!nick) return alert('Enter nickname');
+      user = {nick}; localStorage.setItem('kh_user', JSON.stringify(user));
+      el('loginBtn').textContent = user.nick; closeLogin();
+    }
+
+    // ===== Post CRUD (localStorage demo) =====
+    function submitPost(){
+      const cat = el('catSel').value; const title = el('titleInp').value.trim(); const body = el('bodyInp').value.trim();
+      if(!title || !body) return alert('Fill title & content');
+      const p = {id:'p'+Math.random().toString(36).slice(2,8),cat,title,body,nick:user?user.nick:'Anon',ts:Date.now(),views:0,likes:0};
+      posts.unshift(p); persist(); closePost(); renderFeed(); alert('Posted!');
+      el('titleInp').value=''; el('bodyInp').value='';
+    }
+
+    function openDetail(id){
+      const p = posts.find(x=>x.id===id); if(!p) return; p.views++; persist();
+      const box = el('detailBox');
+      box.innerHTML = `<h3>${p.title}</h3>
+        <div class="meta">#${t(p.cat)} • by ${p.nick} • ${timeAgo(p.ts)} • ${p.views} views • ${p.likes} ❤</div>
+        <p style="white-space:pre-line;margin-top:12px">${p.body}</p>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="btn" onclick="likePost('${p.id}')">Like</button>
+          <button class="btn" onclick="reportPost('${p.id}')">Report</button>
+          <button class="btn" onclick="close('detailModal')">Close</button>
+        </div>`;
+      mod('detailModal');
+    }
+
+    function likePost(id){ const p = posts.find(x=>x.id===id); if(!p) return; p.likes++; persist(); renderFeed() }
+    function reportPost(id){ alert('Thanks! A moderator will review this. (Demo)') }
+
+    function persist(){ localStorage.setItem(postsKey, JSON.stringify(posts)) }
+
+    // ===== Events & Init =====
+    el('year').textContent = new Date().getFullYear();
+    el('loginBtn').onclick = openLogin;
+    el('postBtn').onclick = openPost;
+    el('searchBtn').onclick = renderFeed;
+    el('q').addEventListener('input', ()=>{renderFeed()});
+
+    // language selector
+    const langSel = el('langSel'); langSel.value = lang; langSel.onchange = ()=>{lang=langSel.value; localStorage.setItem('kh_lang',lang); applyLang(); renderFilters(); renderFeed()}
+
+    applyLang(); renderFilters(); renderFeed();
+  </script>
+</body>
+</html>
